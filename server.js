@@ -1,36 +1,31 @@
 // Require dependencies
-var express = require('express');
-var path = require("path");
-var bodyParser = require('body-parser');
-// Instantiate express app
+const express = require('express');
+const path = require("path");
+const bodyParser = require('body-parser');
+
+// Instantiate server
 var app = express();
-app.use(bodyParser.text());
+
+// Use static server to serve the web app
+app.use(express.static('./app/public'));
+
+// Mount middleware
+app.use(bodyParser.json());
+
 // Define port
 var PORT = 8080;
 
-/*****************
- * Define routes *
- ****************/
+/****************************
+ * Import and mount routers *
+ ****************************/
 
-// 'Home' route -GET
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "app/public/home.html"));
-});
+// API Route
+const apiRouter = require('./app/routing/apiRoutes.js');
+app.use('/api/friends', apiRouter);
 
-// 'Survey' route - GET
-app.get("/survey", function (req, res) {
-  res.sendFile(path.join(__dirname, "app/public/survey.html"));
-});
-
-// 'Survey' route - POST
-app.post("/survey", function (req, res) {
-  // do something...
-});
-
-// Wildcard route, redirect to home page
-app.get("*", function (req, res) {
-  res.redirect('/');
-});
+// HTMl Route
+const htmlRouter = require('./app/routing/htmlRoutes.js');
+app.use('*', htmlRouter);
 
 /****************
  * Start server *
@@ -38,5 +33,5 @@ app.get("*", function (req, res) {
 
 // ANSI Bash Formatting
 let bold = '\x1B[1m', blueBG = '\x1B[44m', reset = '\x1B[0m';
-// Server listen on PORT
+// Start server
 app.listen(PORT, () => console.log(`Server listening at: ${bold}${blueBG} localhost:${PORT} ${reset}`));
