@@ -3,12 +3,12 @@ const express = require('express');
 // Create router
 const htmlRouter = express.Router();
 
-// 'Home' route - GET
+// '/' route - GET
 htmlRouter.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/home.html"));
 });
 
-// 'Survey' route - GET
+// '/survey' route - GET
 htmlRouter.get("/survey", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/survey.html"));
 });
