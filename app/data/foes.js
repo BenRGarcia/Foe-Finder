@@ -21,7 +21,7 @@ let foes = [
     "scores": [ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
   },{
     "name": "Lord Voldemort",
-    "quip": "For He-Who-Must-Not-Be-Named, there is no safety",
+    "quip": "From He-Who-Must-Not-Be-Named, there is no safety",
     "photo": "https://www.ocregister.com/wp-content/uploads/migration/lw6/lw6bws-b78886536z.120111213191646000g7h145pdt.1.jpg?w=620",
     "scores": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
   }
