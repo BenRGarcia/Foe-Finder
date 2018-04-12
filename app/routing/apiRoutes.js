@@ -1,9 +1,5 @@
 // Require dependencies
 const express = require('express');
-const bodyParser = require('body-parser');
-
-// Mount middleware
-app.use(bodyParser.json());
 
 // Create router
 const apiRouter = express.Router();
