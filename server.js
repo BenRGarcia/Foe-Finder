@@ -1,6 +1,5 @@
 // Require dependencies
 const express = require('express');
-const path = require("path");
 const bodyParser = require('body-parser');
 
 // Instantiate server
@@ -22,7 +21,7 @@ app.use('/api/friends', apiRouter);
 
 // HTMl Route
 const htmlRouter = require('./app/routing/htmlRoutes.js');
-app.use('*', htmlRouter);
+app.use('/', htmlRouter);
 
 /****************
  * Start server *
