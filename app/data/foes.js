@@ -26,3 +26,5 @@ let foes = [
     "scores": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
   }
 ];
+
+module.exports = foes;
