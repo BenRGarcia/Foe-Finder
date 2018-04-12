@@ -4,16 +4,13 @@ const path = require("path");
 const bodyParser = require('body-parser');
 
 // Instantiate server
-var app = express();
-
-// Use static server to serve the web app
-app.use(express.static('./app/public'));
+const app = express();
 
 // Mount middleware
 app.use(bodyParser.json());
 
 // Define port
-var PORT = 8080;
+const PORT = process.env.PORT || 3000;
 
 /****************************
  * Import and mount routers *
