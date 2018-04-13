@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require("path");
 // Import helper functions
-const { allPropsPresent, elemsAreAllType, mapFactory, minValueTupleKey } = require('./utils.js');
+const { allPropsPresent, elemsAreAllNums, mapFactory, minValueTupleKey } = require('./utils.js');
 // Import database substitute
 let foes = require('../data/foes.js');
 
@@ -12,6 +12,9 @@ let foes = require('../data/foes.js');
 const validateInput = (req, res, next) => {
   // Declare variable, store request body
   const newUser = req.body;
+  // Convert string values to numbers
+  newUser.scores = newUser.scores.map(el => parseInt(el));
+  console.log(newUser);
   // Define array of required data object props
   const requiredProps = ["name", "quip", "photo", "scores"]
   // Test data object for presence of all required props
@@ -27,7 +30,7 @@ const validateInput = (req, res, next) => {
     return next(error);
   }
   // Test 'score' data prop for number type of elements
-  if (!elemsAreAllType(newUser.scores, 'number')) {
+  if (!elemsAreAllNums(newUser.scores)) {
     const error = new Error(`Property 'scores' array contains incorrect primitive data type. Should be 'number'.`);
     error.status = 400;
     return next(error);
