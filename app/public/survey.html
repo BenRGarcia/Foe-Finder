@@ -6,8 +6,6 @@
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Vue.js - development version, includes helpful console warnings -->
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <!-- Bootstrap CSS -->
   <link
     rel="stylesheet"
@@ -20,53 +18,201 @@
     src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"
     integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+"
     crossorigin="anonymous"></script>
+  <style>
+    .dropdown {
+      max-width: 250px;
+    }
+    label {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+  </style>
   <!-- Page Title -->
   <title>Foe Finder | Survey</title>
 </head>
 <body>
-  <div id="app">
-    <div class="container">
-      <h1 class="display-1">Survey</h1>
 
-      <!-- Survey Form -->
-      <form class="border p-3">
-        <!-- User Name -->
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            class="form-control"
-            placeholder="ex. J-Son">
+  <div class="container mb-5">
+    <h1 class="display-1">Survey</h1>
+    <!-- Survey Form -->
+    <form class="border p-3">
+      <!-- User Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          required
+          id="name"
+          type="text"
+          class="form-control"
+          placeholder="ex. J-Son">
+      </div>
+      <!-- User Image Link -->
+      <div class="form-group">
+        <label for="photo">Link to photo</label>
+        <input
+          required
+          id="photo"
+          type="url"
+          class="form-control"
+          placeholder="ex. www.example.com/my-picture">
+      </div>
+      <!-- User Witty Quip -->
+      <div class="form-group">
+        <label for="quip">Witty Quip</label>
+        <input
+          required
+          id="quip"
+          type="text"
+          class="form-control"
+          placeholder="ex. Get your facts first, then you can distort them as you please">
+      </div>
+      <hr class="mt-4 mb-2">
+      <!-- Question #1 -->
+      <div class="form-group">
+        <label for="q1">Kittens make the best evil pets</label>
+        <select required class="form-control dropdown" id="q1">
+          <option value="" disabled selected>Select an option</option>
+          <option value="1">1 (Strongly Disagree)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 (Strongly Agree)</option>
+        </select>
+      </div>
+      <!-- Question #2 -->
+      <div class="form-group">
+        <label for="q2">A good sense of humor is always appreciated</label>
+        <select required class="form-control dropdown" id="q2">
+          <option value="" disabled selected>Select an option</option>
+          <option value="1">1 (Strongly Disagree)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 (Strongly Agree)</option>
+        </select>
+      </div>
+      <!-- Question #3 -->
+      <div class="form-group">
+        <label for="q3">One should not abstain from eating brains</label>
+        <select required class="form-control dropdown" id="q3">
+          <option value="" disabled selected>Select an option</option>
+          <option value="1">1 (Strongly Disagree)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 (Strongly Agree)</option>
+        </select>
+      </div>
+      <!-- Question #4 -->
+      <div class="form-group">
+        <label for="q4">A circus is a fun place to be</label>
+        <select required class="form-control dropdown" id="q4">
+          <option value="" disabled selected>Select an option</option>
+          <option value="1">1 (Strongly Disagree)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 (Strongly Agree)</option>
+        </select>
+      </div>
+      <!-- Question #5 -->
+      <div class="form-group">
+        <label for="q5">Oh what fun casting spells can be</label>
+        <select required class="form-control dropdown" id="q5">
+          <option value="" disabled selected>Select an option</option>
+          <option value="1">1 (Strongly Disagree)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 (Strongly Agree)</option>
+        </select>
+      </div>
+      <!-- Question #6 -->
+      <div class="form-group">
+        <label for="q6">Everyone needs a miniature clone of themselves</label>
+        <select required class="form-control dropdown" id="q6">
+          <option value="" disabled selected>Select an option</option>
+          <option value="1">1 (Strongly Disagree)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 (Strongly Agree)</option>
+        </select>
+      </div>
+      <!-- Question #7 -->
+      <div class="form-group">
+        <label for="q7">To be fearful of bats is wise</label>
+        <select required class="form-control dropdown" id="q7">
+          <option value="" disabled selected>Select an option</option>
+          <option value="1">1 (Strongly Disagree)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 (Strongly Agree)</option>
+        </select>
+      </div>
+      <!-- Question #8 -->
+      <div class="form-group">
+        <label for="q8">Criminal insanity is no reason for incarcertation</label>
+        <select required class="form-control dropdown" id="q8">
+          <option value="" disabled selected>Select an option</option>
+          <option value="1">1 (Strongly Disagree)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 (Strongly Agree)</option>
+        </select>
+      </div>
+      <!-- Question #9 -->
+      <div class="form-group">
+        <label for="q9">One should avoid clowns with fangs</label>
+        <select required class="form-control dropdown" id="q9">
+          <option value="" disabled selected>Select an option</option>
+          <option value="1">1 (Strongly Disagree)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 (Strongly Agree)</option>
+        </select>
+      </div>
+      <!-- Question #10 -->
+      <div class="form-group">
+        <label for="q10">One should strive for immortality through magical means</label>
+        <select required class="form-control dropdown" id="q10">
+          <option value="" disabled selected>Select an option</option>
+          <option value="1">1 (Strongly Disagree)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 (Strongly Agree)</option>
+        </select>
+      </div>
+      <!-- SUBMIT button -->
+      <button id="submitSurvey" type="submit" class="btn btn-primary w-100">Submit</button>
+    </form><!-- End 'Survey Form' -->
+  </div><!-- End Div 'container' -->
+  <!-- Results modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <!-- User Image Link -->
-        <div class="form-group">
-          <label for="image">Link to image</label>
-          <input
-            id="image"
-            type="url"
-            class="form-control"
-            placeholder="ex. www.example.com/my-picture">
+        <div class="modal-body">
+          ...
         </div>
-        <!-- User Witty Quip -->
-        <div class="form-group">
-          <label for="quip">Witty Quip</label>
-          <input
-            id="quip"
-            type="text"
-            class="form-control"
-            placeholder="ex. Get your facts first, then you can distort them as you please">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
-
-
-        <!-- Survey Questions here -->
-
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form><!-- End 'Survey Form' -->
-
-    </div><!-- End Div 'container' -->
+      </div>
+    </div>
   </div>
+  <!-- End 'Results modal' -->
   <footer class="fixed-bottom text-center pb-2">
     <a href="/api/friends" class="text-dark">API Friends List</a>&nbsp;|
     <a href="https://github.com/BenRGarcia/Foe-Finder" class="text-dark">&nbsp;<i class="fab fa-github"></i>&nbsp;Source Code</a>
@@ -87,45 +233,55 @@
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
     crossorigin="anonymous"></script>
   <script>
-    /*********************
-     *      Vue.js       *
-     *********************/
-    // Instantiate Vue
-    var app = new Vue({
-      el: '#app',
-      data: {
-        // List of all questions
-        questionsList: [
-          { q: 'Kittens make the best pets' },
-          { q: 'A good sense of humor is always appreciated' },
-          { q: 'One should not abstain from eating brains' },
-          { q: 'A circus is a fun place to be' },
-          { q: 'Oh what fun casting spells can be' },
-          { q: 'Everyone needs a miniature clone of themselves' },
-          { q: 'To be fearful of bats is wise' },
-          { q: 'Criminal insanity is no reason for incarcertation' },
-          { q: 'One should avoid clowns with fangs' },
-          { q: 'Immortality should be achieved' }
-        ],
-        // Render to all <select> drop-down <option>'s
-        optionsList: [
-          { text: '1 (Strongly Disagree)' },
-          { text: '2' },
-          { text: '3' },
-          { text: '4' },
-          { text: '5 (Strongly Agree)' },
-        ]
-      }
-    });
-    // Create question component
-    Vue.component('questions', {
-      props: ['questionsList'],
-      template: ''
-    });
-    // Create drop down component
-    Vue.component('options', {
-      props: ['optionsList'],
-      template: '<option>{{ optionsList.text }}</option>'
+    /**
+     * FORM LOGIC
+     */
+    // Shorthand for $( document ).ready()
+    $(function () {
+      // When completed form is submitted
+      $('form').on('submit', (e) => {
+        // Prevent default reloading of page
+        e.preventDefault();
+        // Gather values from survey
+        const newUser = {
+          name: $("#name").val().trim(),
+          photo: $("#photo").val().trim(),
+          quip: $("#quip").val().trim(),
+          scores: [
+            $("#q1").val(), 
+            $("#q2").val(), 
+            $("#q3").val(), 
+            $("#q4").val(), 
+            $("#q5").val(), 
+            $("#q6").val(), 
+            $("#q7").val(), 
+            $("#q8").val(), 
+            $("#q9").val(), 
+            $("#q10").val(),
+          ]
+        };
+        // Clear input values from window
+        $("#name").val("");
+        $("#photo").val("");
+        $("#quip").val("");
+        $("#q1").val("");
+        $("#q2").val("");
+        $("#q3").val("");
+        $("#q4").val("");
+        $("#q5").val("");
+        $("#q6").val("");
+        $("#q7").val("");
+        $("#q8").val("");
+        $("#q9").val("");
+        $("#q10").val("");
+        // Send post request
+        $.post('/api/friends', newUser)
+          .then( archEnemy => {
+            // Render response object to modal
+            
+          })
+          .catch(err => console.error(err));
+      });
     });
   </script>
 </body>
