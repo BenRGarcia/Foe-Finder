@@ -30,8 +30,8 @@ const mapFactory = (ctrlObj, objArray, prop) => {
   // Iterate over objects in objArray
   objArray.forEach(obj => {
     // Reduce each objects 'prop' array into cumulative difference of control obj array
-    const cumulativeDiff = obj.prop.reduce((acc, cur, i, arr) => {
-      return Math.abs(cur - ctrlObj.prop[i]);
+    const cumulativeDiff = obj[prop].reduce((acc, cur, i, arr) => {
+      return Math.abs(cur - ctrlObj[prop][i]);
     }, 0);
     // Add tuple to weakmap
     objDiffMap.set(obj, cumulativeDiff);
