@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require("path");
 // Import helper functions
-const { allPropsPresent, elemsAreAllType, minValueTupleKey } = require('./utils.js');
+const { allPropsPresent, elemsAreAllType, mapFactory, minValueTupleKey } = require('./utils.js');
 // Import database substitute
 let foes = require('../data/foes.js');
 
@@ -31,7 +31,7 @@ const validateInput = (req, res, next) => {
   next();
 };
 
-/** (This function is still under construction...)
+/**
  *  Find most compatible arch enemy
  *    - Returns arch enemy object
  */
@@ -39,9 +39,7 @@ const getArchEnemy = (user) => {
   // Simulate database roundtrip
   try {
     return new Promise((resolve, reject) => {
-      // Create weakMap?
-      // Get user scores
-      // Map 
+
     });
   } catch (err) {
     // Server side err
@@ -51,25 +49,6 @@ const getArchEnemy = (user) => {
     error.status = 500;
     return next(error);
   }
-
-  // Extract answer array from object
-  const scores = user.scores;
-  // Declare map to store aggregate results: [ [<index of foe>, <score>], [...], ... ]
-  let foeMap = new Map();
-  // Iterate over all foes
-  for (let indexOfFoe = 0; indexOfFoe < foes.length; indexOfFoe++) {
-    // Declare counter
-    let cumulativeScore = 0;
-    // Iterate over scores
-    for (let indexOfScore = 0; indexOfScore < scores.length; indexOfScore++) {
-      // perform mathematical sum of abs val of difference of matched element between arrays
-      cumulativeScore += Math.abs(scores[indexOfScore] - foes[indexOfFoe].score[indexOfScore]);
-    }
-    // Add to Map [<index of foe>, <score diff>]
-    foeMap.set(indexOfFoe, cumulativeScore);
-  }
-  // Return foe object that has the most compatibility
-  return foes[keyOfHighestValue(foeMap)];
 }
 
 // Create router
