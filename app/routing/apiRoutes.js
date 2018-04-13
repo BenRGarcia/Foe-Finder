@@ -6,10 +6,9 @@ const { allPropsPresent, elemsAreAllType, mapFactory, minValueTupleKey } = requi
 // Import database substitute
 let foes = require('../data/foes.js');
 
-/**
- *  Data validation:
- *    - Returns true/false if data object is valid
- */
+/*************************************************************
+ * Data validation, 'next()' stack only if data object valid *
+ *************************************************************/
 const validateInput = (req, res, next) => {
   // Declare variable, store request body
   const newUser = req.body;
@@ -31,15 +30,18 @@ const validateInput = (req, res, next) => {
   next();
 };
 
-/**
- *  Find most compatible arch enemy
- *    - Returns arch enemy object
- */
+/**************************************************************
+ * Find most compatible arch enemy, returns arch enemy object *
+ **************************************************************/
 const getArchEnemy = (user) => {
   // Simulate database roundtrip
   try {
     return new Promise((resolve, reject) => {
-
+      // Create weak map of [Foe objects, cumulative score difference]
+      const foeMap = mapFactory(user, foes, 'scores');
+      // Find/return object with lowest score difference
+      const archEnemy = minValueTupleKey(foeMap);
+      resolve(archEnemy);
     });
   } catch (err) {
     // Server side err
@@ -51,6 +53,10 @@ const getArchEnemy = (user) => {
   }
 }
 
+/******************************
+ * Routing and Error Handling *
+ ******************************/
+
 // Create router
 const apiRouter = express.Router();
 
@@ -61,7 +67,7 @@ apiRouter.route('/')
     let newUser = req.body;
     // Simulate database roundtrip
     getArchEnemy(newUser)
-      .then( archEnemy => {
+      .then(archEnemy => {
         res.send(archEnemy)
       });
   });
