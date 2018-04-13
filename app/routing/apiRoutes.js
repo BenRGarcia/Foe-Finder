@@ -14,7 +14,6 @@ const validateInput = (req, res, next) => {
   const newUser = req.body;
   // Convert string values to numbers
   newUser.scores = newUser.scores.map(el => parseInt(el));
-  console.log(newUser);
   // Define array of required data object props
   const requiredProps = ["name", "quip", "photo", "scores"]
   // Test data object for presence of all required props
