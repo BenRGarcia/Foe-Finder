@@ -235,7 +235,7 @@
     // Shorthand for $( document ).ready()
     $(function () {
       // When completed form is submitted
-      $('').on('submit', (e) => {
+      $('.container').on('submit', 'form', (e) => {
         // Prevent default reloading of page
         e.preventDefault();
         // Gather values from survey
