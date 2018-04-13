@@ -27,7 +27,5 @@ app.use('/', htmlRouter);
  * Start server *
  ****************/
 
-// ANSI Bash Formatting
-let bold = '\x1B[1m', blueBG = '\x1B[44m', reset = '\x1B[0m';
 // Start server
-app.listen(PORT, () => console.log(`Server listening at: ${bold}${blueBG} localhost:${PORT} ${reset}`));
+app.listen(PORT, () => console.log(`Server listening at PORT: ${PORT}`));
