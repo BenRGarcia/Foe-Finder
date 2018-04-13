@@ -27,6 +27,44 @@
   <div id="app">
     <div class="container">
       <h1 class="display-1">Survey</h1>
+
+      <!-- Survey Form -->
+      <form class="border p-3">
+        <!-- User Name -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            class="form-control"
+            placeholder="ex. J-Son">
+        </div>
+        <!-- User Image Link -->
+        <div class="form-group">
+          <label for="image">Link to image</label>
+          <input
+            id="image"
+            type="url"
+            class="form-control"
+            placeholder="ex. www.example.com/my-picture">
+        </div>
+        <!-- User Witty Quip -->
+        <div class="form-group">
+          <label for="quip">Witty Quip</label>
+          <input
+            id="quip"
+            type="text"
+            class="form-control"
+            placeholder="ex. Get your facts first, then you can distort them as you please">
+        </div>
+
+
+        <!-- Survey Questions here -->
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form><!-- End 'Survey Form' -->
+
     </div><!-- End Div 'container' -->
   </div>
   <footer class="fixed-bottom text-center pb-2">
@@ -49,13 +87,40 @@
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
     crossorigin="anonymous"></script>
   <script>
+    /*********************
+     *      Vue.js       *
+     *********************/
     // Instantiate Vue
     var app = new Vue({
       el: '#app',
       data: {
-        
+        // List of all questions
+        questions: [
+          { q: 'Kittens make the best pets' },
+          { q: 'A good sense of humor is always appreciated' },
+          { q: 'One should not abstain from eating brains' },
+          { q: 'A circus is a fun place to be' },
+          { q: 'Oh what fun casting spells can be' },
+          { q: 'Everyone needs a miniature clone of themselves' },
+          { q: 'To be fearful of bats is wise' },
+          { q: 'Criminal insanity is no reason for incarcertation' },
+          { q: 'One should avoid clowns with fangs' },
+          { q: 'Immortality should be achieved' }
+        ],
+        // Render to all <select> drop-down <option>'s
+        options: [
+          { text: '1 (Strongly Disagree)' },
+          { text: '2' },
+          { text: '3' },
+          { text: '4' },
+          { text: '5 (Strongly Agree)' },
+        ]
       }
-    })
+    });
+    // Create question component
+    Vue.component();
+    // Create drop down component
+    Vue.component();
   </script>
 </body>
 </html>
