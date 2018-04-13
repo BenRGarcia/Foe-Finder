@@ -44,7 +44,9 @@ const getArchEnemy = (user) => {
       // Map 
     });
   } catch (err) {
+    // Server side err
     console.error(err);
+    // Client side error
     const error = new Error(`Query failure, database did not update.`);
     error.status = 500;
     return next(error);
