@@ -16,7 +16,13 @@ const validateInput = (req, res, next) => {
   const requiredProps = ["name", "quip", "photo", "scores"]
   // Test data object for presence of all required props
   if (!allPropsPresent(newUser, requiredProps)) {
-    const error = new Error(`Request body missing required properties`);
+    const error = new Error(`Request body has erroneous properties`);
+    error.status = 400;
+    return next(error);
+  }
+  // Test 'score' data prop for correct array length
+  if (newUser.scores.length !== 10) {
+    const error = new Error(`Property 'scores' array contains incorrect number of elements. Should have 10.`);
     error.status = 400;
     return next(error);
   }
@@ -65,19 +71,20 @@ apiRouter.route('/')
   .get((req, res, next) => res.json(foes))
   .post(validateInput, (req, res, next) => {
     let newUser = req.body;
-    // Add new user to "Database"
-    foes.push(newUser);
     // Simulate database roundtrip
     getArchEnemy(newUser)
       .then(archEnemy => {
+        // Add new user to "Database"
+        foes.push(newUser);
+        // Send response object
         res.send(archEnemy)
       });
   });
 
-// Error handling
+// Client-Side Error handling
 apiRouter.use((err, req, res, next) => {
-  err = err.status || 500;
-  res.status(err).send(err.message);
+  let status = err.status || 500;
+  res.status(status).send({ error: err.message});
 });
 
 module.exports = apiRouter;
