@@ -26,7 +26,7 @@ const elemsAreAllType = (arr, type) => {
  */
 const mapFactory = (ctrlObj, objArray, prop) => {
   // Create new weak map for object/value pairs ('weak' for garbage collection)
-  const objDiffMap = new WeakMap();
+  const objDiffMap = new Map();
   // Iterate over objects in objArray
   objArray.forEach(obj => {
     // Reduce each objects 'prop' array into cumulative difference of control obj array
