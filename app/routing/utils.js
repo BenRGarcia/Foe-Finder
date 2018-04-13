@@ -23,7 +23,8 @@ const elemsAreAllType = (arr, type) => {
 
 /**
  *  Iterates over a Map object, returns the key of the lowest tuple value
- *    (This algorithm is rubbish, it is not optimized for scalability)
+ *    "This algorithm is rubbish, it is not optimized for scalability"
+ *      - Sad Ben ;-(
  */
 const minValueTupleKey = (mapObj) => {
   // Define variable to hold 'key' of tuple with the highest value
