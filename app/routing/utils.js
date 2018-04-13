@@ -22,6 +22,13 @@ const elemsAreAllNums = (arr) => {
 }
 
 /**
+ *  Returns true/false if all elements of an array are in specified range
+ */
+const numsAreInRange = (arr, num1, num2) => {
+  return arr.every(num => num >= num1 && num <= num2);
+}
+
+/**
  *  Returns map object of [ [<obj>, <cumulative diff of prop elements>], [ ... , ... ], ... ]
  */
 const mapFactory = (ctrlObj, objArray, prop) => {
@@ -58,6 +65,7 @@ const minValueTupleKey = (mapObj) => {
 module.exports = {
   allPropsPresent,
   elemsAreAllNums,
+  numsAreInRange,
   mapFactory,
   minValueTupleKey
 };
