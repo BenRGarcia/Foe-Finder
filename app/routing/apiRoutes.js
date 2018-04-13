@@ -1,29 +1,57 @@
 // Require dependencies
 const express = require('express');
 const path = require("path");
+// Import helper functions
+const { allPropsPresent, elemsAreAllType, minValueTupleKey } = require('./utils.js');
+// Import database substitute
 let foes = require('../data/foes.js');
 
-// Return true/false if new foe has all required properties
-const isValid = (newFoe) => {
-  const requiredProps = ["name", "quip", "photo", "scores"];
-  const foeProps = Object.keys(newFoe);
-  /**
-   *  This input validation is unsophisticated, need to refactor
-   */
-          // Correct number of props
-  return foeProps.length === requiredProps.length && 
-          // All required props present
-         foeProps.every(prop => requiredProps.indexOf(prop) !== -1) &&
-          // 'scores' array is correct length
-         newFoe.scores.length === 10 &&
-          // All elements of 'scores' are numbers
-         newFoe.scores.every( score => typeof score === "number");
+/**
+ *  Data validation:
+ *    - Returns true/false if data object is valid
+ */
+const validateInput = (req, res, next) => {
+  // Declare variable, store request body
+  const newUser = req.body;
+  // Define array of required data object props
+  const requiredProps = ["name", "quip", "photo", "scores"]
+  // Test data object for presence of all required props
+  if (!allPropsPresent(newUser, requiredProps)) {
+    const error = new Error(`Request body missing required properties`);
+    error.status = 400;
+    return next(error);
+  }
+  // Test 'score' data prop for number type of elements
+  if (!elemsAreAllType(newUser.scores, 'number')) {
+    const error = new Error(`Property 'scores' array contains incorrect primitive data type. Should be 'number'.`);
+    error.status = 400;
+    return next(error);
+  }
+  // Data is valid, go to next middleware in stack
+  next();
 };
 
-// Determine arch enemy
-const archEnemy = (newFoe) => {
+/** (This function is still under construction...)
+ *  Find most compatible arch enemy
+ *    - Returns arch enemy object
+ */
+const getArchEnemy = (user) => {
+  // Simulate database roundtrip
+  try {
+    return new Promise((resolve, reject) => {
+      // Create weakMap?
+      // Get user scores
+      // Map 
+    });
+  } catch (err) {
+    console.error(err);
+    const error = new Error(`Query failure, database did not update.`);
+    error.status = 500;
+    return next(error);
+  }
+
   // Extract answer array from object
-  const answers = newFoe.scores;
+  const scores = user.scores;
   // Declare map to store aggregate results: [ [<index of foe>, <score>], [...], ... ]
   let foeMap = new Map();
   // Iterate over all foes
@@ -31,9 +59,9 @@ const archEnemy = (newFoe) => {
     // Declare counter
     let cumulativeScore = 0;
     // Iterate over scores
-    for (let indexOfScore = 0; indexOfScore < answers.length; indexOfScore++) {
+    for (let indexOfScore = 0; indexOfScore < scores.length; indexOfScore++) {
       // perform mathematical sum of abs val of difference of matched element between arrays
-      cumulativeScore += Math.abs( answers[indexOfScore] - foes[indexOfFoe].score[indexOfScore] );
+      cumulativeScore += Math.abs(scores[indexOfScore] - foes[indexOfFoe].score[indexOfScore]);
     }
     // Add to Map [<index of foe>, <score diff>]
     foeMap.set(indexOfFoe, cumulativeScore);
@@ -42,26 +70,25 @@ const archEnemy = (newFoe) => {
   return foes[keyOfHighestValue(foeMap)];
 }
 
-// Returns the 'value' of the mathematically greatest key in a map
-const keyOfHighestValue = (map) => {
-  let highValue;
-  for (true) {
-
-  }
-  // Return Map's value of high key
-  return key;
-}
-
 // Create router
 const apiRouter = express.Router();
 
 // Path: '/api/friends'
 apiRouter.route('/')
   .get((req, res, next) => res.json(foes))
-  .post((req, res, next) => {
-    let newFoe = req.body;
-    if (isValid(newFoe)) res.send(archEnemy(newFoe))
-    else res.status(400).send();
+  .post(validateInput, (req, res, next) => {
+    let newUser = req.body;
+    // Simulate database roundtrip
+    getArchEnemy(newUser)
+      .then( archEnemy => {
+        res.send(archEnemy)
+      });
   });
+
+// Error handling
+apiRouter.use((err, req, res, next) => {
+  err = err.status || 500;
+  res.status(err).send(err.message);
+});
 
 module.exports = apiRouter;
