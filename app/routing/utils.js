@@ -22,6 +22,25 @@ const elemsAreAllType = (arr, type) => {
 }
 
 /**
+ *  Returns map object of [ [<obj>, <cumulative diff of prop elements>], [ ... , ... ], ... ]
+ */
+const mapFactory = (ctrlObj, objArray, prop) => {
+  // Create new weak map for object/value pairs ('weak' for garbage collection)
+  const objDiffMap = new WeakMap();
+  // Iterate over objects in objArray
+  objArray.forEach(obj => {
+    // Reduce each objects 'prop' array into cumulative difference of control obj array
+    const cumulativeDiff = obj.prop.reduce((acc, cur, i, arr) => {
+      return Math.abs(cur - ctrlObj.prop[i]);
+    }, 0);
+    // Add tuple to weakmap
+    objDiffMap.set(obj, cumulativeDiff);
+  });
+  // Return new map to caller
+  return objDiffMap;
+};
+
+/**
  *  Iterates over a Map object, returns the key of the lowest tuple value
  */
 const minValueTupleKey = (mapObj) => {
@@ -40,23 +59,4 @@ module.exports = {
   allPropsPresent,
   elemsAreAllType,
   minValueTupleKey
-};
-
-/**
- *  Returns map object of [ [<obj>, <cumulative diff of prop elements>], [ ... , ... ], ... ]
- */
-const mapFactory = (ctrlObj, objArray, prop) => {
-  // Create new weak map for object/value pairs ('weak' for garbage collection)
-  const objDiffMap = new WeakMap();
-  // Iterate over objects in objArray
-  objArray.forEach(obj => {
-    // Reduce each objects 'prop' array into cumulative difference of control obj array
-    const cumulativeDiff = obj.prop.reduce((acc, cur, i, arr) => {
-      return Math.abs(cur - ctrlObj.prop[i]);
-    }, 0);
-    // Add tuple to weakmap
-    objDiffMap.set(obj, cumulativeDiff);
-  });
-  // Return new map to caller
-  return objDiffMap;
 };
