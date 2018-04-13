@@ -15,10 +15,10 @@ const allPropsPresent = (obj, reqPropsArray) => {
 }
 
 /**
- *  Returns true/false if all elements of an array are a specified type
+ *  Returns true/false if all elements of an array are 'number' and not NaN
  */
-const elemsAreAllType = (arr, type) => {
-  return arr.every(el => typeof el === type);
+const elemsAreAllNums = (arr) => {
+  return arr.every(el => typeof el === 'number' && !isNaN(el));
 }
 
 /**
@@ -57,7 +57,7 @@ const minValueTupleKey = (mapObj) => {
 
 module.exports = {
   allPropsPresent,
-  elemsAreAllType,
+  elemsAreAllNums,
   mapFactory,
   minValueTupleKey
 };
