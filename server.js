@@ -1,12 +1,13 @@
 // Require dependencies
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 // Instantiate server
 const app = express();
 
 // Mount middleware
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Define port
 const PORT = process.env.PORT || 3000;
