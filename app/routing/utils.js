@@ -25,7 +25,7 @@ const elemsAreAllType = (arr, type) => {
  *  Returns map object of [ [<obj>, <cumulative diff of prop elements>], [ ... , ... ], ... ]
  */
 const mapFactory = (ctrlObj, objArray, prop) => {
-  // Create new weak map for object/value pairs ('weak' for garbage collection)
+  // Create new map for object/value pairs
   const objDiffMap = new Map();
   // Iterate over objects in objArray
   objArray.forEach(obj => {
@@ -33,7 +33,7 @@ const mapFactory = (ctrlObj, objArray, prop) => {
     const cumulativeDiff = obj[prop].reduce((acc, cur, i, arr) => {
       return Math.abs(cur - ctrlObj[prop][i]);
     }, 0);
-    // Add tuple to weakmap
+    // Add tuple to map
     objDiffMap.set(obj, cumulativeDiff);
   });
   // Return new map to caller

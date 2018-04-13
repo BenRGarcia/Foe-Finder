@@ -37,7 +37,7 @@ const getArchEnemy = (user) => {
   // Simulate database roundtrip
   try {
     return new Promise((resolve, reject) => {
-      // Create weak map of [Foe objects, cumulative score difference]
+      // Create map of [Foe objects, cumulative score difference]
       const foeMap = mapFactory(user, foes, 'scores');
       // Find/return object with lowest score difference
       const archEnemy = minValueTupleKey(foeMap);
