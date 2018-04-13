@@ -58,5 +58,6 @@ const minValueTupleKey = (mapObj) => {
 module.exports = {
   allPropsPresent,
   elemsAreAllType,
+  mapFactory,
   minValueTupleKey
 };
