@@ -232,13 +232,10 @@
     /**
      * FORM LOGIC
      */
-    function test() {
-      $('#resultsModal').modal("show");
-    }
     // Shorthand for $( document ).ready()
     $(function () {
       // When completed form is submitted
-      $('form').on('submit', (e) => {
+      $('').on('submit', (e) => {
         // Prevent default reloading of page
         e.preventDefault();
         // Gather values from survey
@@ -259,21 +256,8 @@
             $("#q10").val(),
           ]
         };
-        // Clear input values from window
-        $("#name").val("");
-        $("#photo").val("");
-        $("#quip").val("");
-        $("#q1").val("");
-        $("#q2").val("");
-        $("#q3").val("");
-        $("#q4").val("");
-        $("#q5").val("");
-        $("#q6").val("");
-        $("#q7").val("");
-        $("#q8").val("");
-        $("#q9").val("");
-        $("#q10").val("");
-        console.log(newUser);
+        // Clear input values from DOM
+        $('.form-control').val("");
         // Send post request
         $.post('/api/friends', newUser)
           .then( archEnemy => {
