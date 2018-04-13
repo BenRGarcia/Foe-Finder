@@ -1,9 +1,13 @@
 // Require dependencies
 const express = require('express');
-// Import helper functions
-const { allPropsPresent, elemsAreAllNums, mapFactory, minValueTupleKey } = require('./utils.js');
 // Import database substitute
 let foes = require('../data/foes.js');
+// Import helper functions
+const { allPropsPresent, 
+        elemsAreAllNums, 
+        numsAreInRange,
+        mapFactory,
+        minValueTupleKey } = require('./utils.js');
 
 /*************************************************************
  * Data validation, 'next()' stack only if data object valid *
@@ -30,6 +34,12 @@ const validateInput = (req, res, next) => {
   // Test 'score' data prop for number type of elements
   if (!elemsAreAllNums(newUser.scores)) {
     const error = new Error(`Property 'scores' array contains incorrect primitive data type. Should be 'number'.`);
+    error.status = 400;
+    return next(error);
+  }
+  // Test 'score' data prop for numbers between specified range
+  if (!numsAreInRange(newUser.scores, 1, 5)) {
+    const error = new Error(`Property 'scores' array contains numbers outside acceptable range`);
     error.status = 400;
     return next(error);
   }
