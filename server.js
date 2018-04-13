@@ -1,11 +1,10 @@
 // Require dependencies
 const express = require('express');
-// const bodyParser = require('body-parser');
 
 // Instantiate server
 const app = express();
 
-// Mount middleware
+// Mount middleware (Middleware based on body-parser is available in Express v4.16.0 onwards.)
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
