@@ -1,6 +1,5 @@
 // Require dependencies
 const express = require('express');
-const path = require("path");
 // Import helper functions
 const { allPropsPresent, elemsAreAllNums, mapFactory, minValueTupleKey } = require('./utils.js');
 // Import database substitute
