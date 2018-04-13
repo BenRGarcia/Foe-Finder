@@ -95,7 +95,7 @@
       el: '#app',
       data: {
         // List of all questions
-        questions: [
+        questionsList: [
           { q: 'Kittens make the best pets' },
           { q: 'A good sense of humor is always appreciated' },
           { q: 'One should not abstain from eating brains' },
@@ -108,7 +108,7 @@
           { q: 'Immortality should be achieved' }
         ],
         // Render to all <select> drop-down <option>'s
-        options: [
+        optionsList: [
           { text: '1 (Strongly Disagree)' },
           { text: '2' },
           { text: '3' },
@@ -118,9 +118,15 @@
       }
     });
     // Create question component
-    Vue.component();
+    Vue.component('questions', {
+      props: ['questionsList'],
+      template: ''
+    });
     // Create drop down component
-    Vue.component();
+    Vue.component('options', {
+      props: ['optionsList'],
+      template: '<option>{{ optionsList.text }}</option>'
+    });
   </script>
 </body>
 </html>
