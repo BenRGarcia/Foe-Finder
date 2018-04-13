@@ -193,17 +193,17 @@
     </form><!-- End 'Survey Form' -->
   </div><!-- End Div 'container' -->
   <!-- Results modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalCenterTitle">Your Arch Enemy</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          ...
+          <!-- Arch Enemy data to appear here -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -222,12 +222,12 @@
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-    <!-- Popper -->
+  <!-- Popper -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
     integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
     crossorigin="anonymous"></script>
-    <!-- Bootstrap -->
+  <!-- Bootstrap -->
   <script
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
@@ -236,6 +236,9 @@
     /**
      * FORM LOGIC
      */
+    function test() {
+      $('#resultsModal').modal("show");
+    }
     // Shorthand for $( document ).ready()
     $(function () {
       // When completed form is submitted
@@ -277,8 +280,14 @@
         // Send post request
         $.post('/api/friends', newUser)
           .then( archEnemy => {
+            console.log(archEnemy);
             // Render response object to modal
-            
+            let name = `<h2>${archEnemy.name}</h2>`;
+            let img = `<img src="${archEnemy.photo}">`;
+            let quip = `<p>${archEnemy.quip}</p>`;
+            $('.modal-body').append(name, img, quip);
+            // Show modal
+            $('#resultsModal').modal("show");
           })
           .catch(err => console.error(err));
       });
