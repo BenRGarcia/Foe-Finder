@@ -65,6 +65,8 @@ apiRouter.route('/')
   .get((req, res, next) => res.json(foes))
   .post(validateInput, (req, res, next) => {
     let newUser = req.body;
+    // Add new user to "Database"
+    foes.push(newUser);
     // Simulate database roundtrip
     getArchEnemy(newUser)
       .then(archEnemy => {
