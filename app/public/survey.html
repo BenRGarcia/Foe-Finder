@@ -263,6 +263,8 @@
         // Send post request
         $.post('/api/friends', newUser)
           .then( archEnemy => {
+            // Empty previous results in modal
+            $('.modal-body').empty();
             // Render response object to modal
             let name = `<h2>${archEnemy.name}</h2>`;
             let img = `<img src="${archEnemy.photo}" class="img-fluid mb-2">`;
