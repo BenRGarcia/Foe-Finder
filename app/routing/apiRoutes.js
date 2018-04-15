@@ -85,7 +85,7 @@ apiRouter.route('/')
 // Client-Side Error handling
 apiRouter.use((err, req, res, next) => {
   let status = err.status || 500;
-  if (status === 500) err.message = 'Internal Server Error';
+  if (status >= 500) err.message = 'Internal Server Error';
   res.status(status).send({ error: err.message});
 });
 
