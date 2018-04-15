@@ -73,7 +73,7 @@ apiRouter.use((err, req, res, next) => {
 });
 ```
 
-Helper function in ```app/routing/utils.js```
+Helper function in ```/app/routing/utils.js```
 
 ```js
 // Returns true/false if elements of array are exact props of an object
