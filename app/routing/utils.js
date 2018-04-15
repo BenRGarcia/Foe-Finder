@@ -1,5 +1,5 @@
 /**
- *  Returns true/false if elements of array are all props of an object
+ *  Returns true/false if elements of array are exact props of an object
  */
 const allPropsPresent = (obj, reqPropsArray) => {
   // Create an array of object properties
@@ -14,58 +14,4 @@ const allPropsPresent = (obj, reqPropsArray) => {
   return true;
 }
 
-/**
- *  Returns true/false if all elements of an array are 'number' and not NaN
- */
-const elemsAreAllNums = (arr) => {
-  return arr.every(el => typeof el === 'number' && !isNaN(el));
-}
-
-/**
- *  Returns true/false if all elements of an array are in specified range
- */
-const numsAreInRange = (arr, num1, num2) => {
-  return arr.every(num => num >= num1 && num <= num2);
-}
-
-/**
- *  Returns map object of [ [<obj>, <cumulative diff of prop elements>], [ ... , ... ], ... ]
- */
-const mapFactory = (ctrlObj, objArray, prop) => {
-  // Create new map for object/value pairs
-  const objDiffMap = new Map();
-  // Iterate over objects in objArray
-  objArray.forEach(obj => {
-    // Reduce each objects 'prop' array into cumulative difference of control obj array
-    const cumulativeDiff = obj[prop].reduce((acc, cur, i, arr) => {
-      return Math.abs(cur - ctrlObj[prop][i]);
-    }, 0);
-    // Add tuple to map
-    objDiffMap.set(obj, cumulativeDiff);
-  });
-  // Return new map to caller
-  return objDiffMap;
-};
-
-/**
- *  Iterates over a Map object, returns the key of the lowest tuple value
- */
-const minValueTupleKey = (mapObj) => {
-  // Define variable to hold 'key' of tuple with the highest value
-  let minValueTuple = [null, Infinity];
-  // Iterate over tuples in mapObj
-  for (let [key, value] of mapObj) {
-    if (value < minValueTuple[1]) {
-      minValueTuple = [key, value];
-    }
-  }
-  return minValueTuple[0];
-}
-
-module.exports = {
-  allPropsPresent,
-  elemsAreAllNums,
-  numsAreInRange,
-  mapFactory,
-  minValueTupleKey
-};
+module.exports = allPropsPresent;
