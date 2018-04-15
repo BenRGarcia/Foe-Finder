@@ -34,6 +34,21 @@ const htmlRouter = require('./app/routing/htmlRoutes.js');
 app.use('/', htmlRouter);
 ```
 
+Serving html in ```/app/routing/htmlRoutes.js```
+
+```js
+const htmlRouter = express.Router();
+htmlRouter.get("/", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "../public/home.html"));
+});
+htmlRouter.get("/survey", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "../public/survey.html"));
+});
+htmlRouter.get("*", (req, res, next) => {
+  res.status(301).redirect('/');
+});
+```
+
 API router with error handling in ```/app/routing/apiRoutes.js```
 
 ```js
@@ -55,21 +70,6 @@ apiRouter.use((err, req, res, next) => {
   let status = err.status || 500;
   if (status >= 500) err.message = 'Internal Server Error';
   res.status(status).send({ error: err.message});
-});
-```
-
-Serving html in ```/app/routing/htmlRoutes.js```
-
-```js
-const htmlRouter = express.Router();
-htmlRouter.get("/", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "../public/home.html"));
-});
-htmlRouter.get("/survey", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "../public/survey.html"));
-});
-htmlRouter.get("*", (req, res, next) => {
-  res.status(301).redirect('/');
 });
 ```
 
