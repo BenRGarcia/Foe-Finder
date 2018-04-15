@@ -22,12 +22,14 @@ A Node.js app that receives GET and POST requests from clients. Live site deploy
 Middleware and Routing in ```server.js```
 
 ```js
-// Middleware for request body
+// Mount middleware for request body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Modularization of route paths - html vs api
+
+// API route
 const apiRouter = require('./app/routing/apiRoutes.js');
 app.use('/api/friends', apiRouter);
+// HTML route
 const htmlRouter = require('./app/routing/htmlRoutes.js');
 app.use('/', htmlRouter);
 ```
