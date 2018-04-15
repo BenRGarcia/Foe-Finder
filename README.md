@@ -35,26 +35,23 @@ app.use('/', htmlRouter);
 API router with error handling in ```/app/routing/apiRoutes.js```
 
 ```js
+// Create router
 const apiRouter = express.Router();
 
 // Path: '/api/friends'
 apiRouter.route('/')
   .get((req, res, next) => res.json(foes))
-  .post(validateInput, (req, res, next) => {
-    let newUser = req.body;
-    // Simulate database roundtrip
-    getArchEnemy(newUser)
-      .then(archEnemy => {
-        // Add new user to "Database"
-        foes.push(newUser);
-        // Send response object
-        res.send(archEnemy)
-      });
+  .post(validateInput, getArchEnemy, (req, res, next) => {
+    // Add new user to 'foes' array
+    foes.push(req.newUser);
+    // Send response object
+    res.send(req.archEnemy)
   });
 
 // Client-Side Error handling
 apiRouter.use((err, req, res, next) => {
   let status = err.status || 500;
+  if (status >= 500) err.message = 'Internal Server Error';
   res.status(status).send({ error: err.message});
 });
 ```
@@ -74,17 +71,20 @@ htmlRouter.get("*", (req, res, next) => {
 });
 ```
 
-Helper functions in ```app/routing/utils.js```
+Helper function in ```app/routing/utils.js```
 
 ```js
-// Iterates over a Map object, returns the key of the lowest tuple value
-const minValueTupleKey = (mapObj) => {
-  let minValueTuple = [null, Infinity];
-  for (let [key, value] of mapObj) {
-    if (value < minValueTuple[1]) {
-      minValueTuple = [key, value];
-    }
-  }
-  return minValueTuple[0];
+// Returns true/false if elements of array are exact props of an object
+const allPropsPresent = (obj, reqPropsArray) => {
+  // Create an array of object properties
+  const objProps = Object.keys(obj);
+  // Ensure exact number of props required actually exist
+  if (objProps.length !== reqPropsArray.length) return false;
+  // Ensure each prop is present in the object
+  if (!objProps.every(prop => reqPropsArray.indexOf(prop) !== -1)) return false;
+  // Ensure each property's value is not null or undefined
+  if (!objProps.every(prop => obj[prop] !== null || undefined)) return false;
+  // Return 'true', object properties match exactly with passed in array
+  return true;
 }
 ```
